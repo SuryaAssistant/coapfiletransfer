@@ -1,3 +1,10 @@
+# ----------------------------------------------------------------------------------------------------
+# Example program which encode file into base64 representation and decode as file again
+# before used as foundation of transfer file through CoAP
+# 
+# Created by Fandi Adinata @2021 <https://githun.com/SuryaAssistant/coapfiletransfer>
+# ----------------------------------------------------------------------------------------------------
+
 import base64
 import os
 import datetime

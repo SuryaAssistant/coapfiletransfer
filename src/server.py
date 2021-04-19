@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------------------------------
 # Example program which support file transfer
 # from client and server through CoAP using aiocoap
-# Created by Fandi Adinata @2021 <https://githun.com/SuryaAssistant/coapfiletransfer>
+# Created by Fandi Adinata @2021 <https://github.com/SuryaAssistant/coapfiletransfer>
 #
 # Thanks to aiocoap  
 # Copyright (c) 2012-2014 Maciej Wasilak <http://sixpinetrees.blogspot.com/>,
@@ -71,8 +71,7 @@ class WhoAmI(resource.Resource):
         else:
             text.append("No claims authenticated.")
 
-        return aiocoap.Message(content_format=0,
-                payload="\n".join(text).encode('utf8'))
+        return aiocoap.Message(content_format=0, payload="\n".join(text).encode('utf8'))
     
 # class to save image
 class save_image(resource.Resource):
@@ -90,9 +89,10 @@ class save_image(resource.Resource):
         # convert to string
         get_payload = request.payload.decode('ascii', 'ignore').split(',')
         
-        file_name = get_payload[0]
-        file_extension = get_payload[1]
-        image_payload = get_payload[2]
+        ip_client = get_payload[0]
+        file_name = get_payload[1]
+        file_extension = get_payload[2]
+        image_payload = get_payload[3]
                 
         # get timestamp as name of file
         timestamp = datetime.datetime.now()
@@ -115,8 +115,7 @@ def main():
     # Resource tree creation
     root = resource.Site()
 
-    root.add_resource(['.well-known', 'core'],
-            resource.WKCResource(root.get_resources_as_linkheader))
+    root.add_resource(['.well-known', 'core'], resource.WKCResource(root.get_resources_as_linkheader))
     root.add_resource(['other', 'separate'], SeparateLargeResource())
     root.add_resource(['whoami'], WhoAmI())
     root.add_resource(['image'], save_image())
